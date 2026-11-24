@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twist &amp; Make | Handmade pipe-cleaner flowers and gifts</title>
+  <meta name="description" content="Browse handmade pipe-cleaner flowers, bouquets, flower pots and Christmas decorations from Twist & Make.">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fcf8f2;
+      --ink: #342b31;
+      --muted: #62545c;
+      --green: #254f40;
+      --line: #dbcfc5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 1rem/1.55 system-ui, sans-serif;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3, .brand { font-family: Georgia, serif; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    img[hidden] { display: none; }
+    a { color: inherit; }
+
+    button, .button {
+      display: inline-block;
+      border: 1px solid var(--green);
+      border-radius: 6px;
+      padding: .65rem .95rem;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #934869;
+      outline-offset: 3px;
+    }
+
+    .outline {
+      background: transparent;
+      color: var(--green);
+    }
+
+    .wrap { width: min(1120px, calc(100% - 2rem)); margin: auto; }
+
+    header { border-bottom: 1px solid var(--line); }
+
+    .header-row, .section-row, .card-row, .basket-row, .total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+
+    .header-row { padding-block: 1rem; }
+    .brand { font-size: 1.5rem; font-weight: bold; text-decoration: none; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: #eee8db;
+      margin-top: 1.75rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .hero-copy { padding: clamp(1.5rem, 6vw, 4rem); }
+    .hero h1 { font-size: clamp(2.5rem, 5.5vw, 5rem); line-height: .98; }
+    .hero p { margin: 1rem 0 1.25rem; max-width: 33ch; }
+    .hero .photo { aspect-ratio: 5 / 4; }
+
+    .photo {
+      display: grid;
+      place-items: center;
+      background: #e4e9df;
+      overflow: hidden;
+    }
+
+    .photo p { padding: 1rem; text-align: center; overflow-wrap: anywhere; }
+    .collection { padding-block: 3rem; }
+    .collection h2, dialog h2 { font-size: 2rem; line-height: 1.15; }
+    .muted { color: var(--muted); }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .filters button[aria-pressed="true"] {
+      background: var(--green);
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+      gap: 1.15rem;
+    }
+
+    .product {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fffdf9;
+    }
+
+    .product .photo { aspect-ratio: 3 / 4; }
+
+    .details {
+      display: grid;
+      align-content: start;
+      gap: .45rem;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .product h3 { font-size: 1.23rem; line-height: 1.2; }
+    .card-row { margin-top: auto; padding: 0 1rem 1rem; }
+    .price { font-weight: 700; white-space: nowrap; color: var(--green); }
+    footer { border-top: 1px solid var(--line); padding-block: 1.5rem; }
+
+    dialog {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      width: min(500px, calc(100% - 2rem));
+      max-height: 85vh;
+      padding: 1.25rem;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    dialog::backdrop { background: #231a22a8; }
+    .basket-row { padding-block: .8rem; border-bottom: 1px solid var(--line); }
+    .quantity { display: flex; align-items: center; gap: .45rem; }
+    .quantity button { padding: .25rem .6rem; min-width: 2rem; }
+    .total { margin-block: 1rem .5rem; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+    @media (max-width: 650px) {
+      .hero { grid-template-columns: 1fr; }
+      .section-row { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap header-row">
+      <a class="brand" href="#">Twist &amp; Make</a>
+      <button class="outline" id="open-basket" type="button">Basket (0)</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="shop-title">
+      <div class="hero-copy">
+        <h1 id="shop-title">Flowers that stay in bloom</h1>
+        <p>Handmade pipe-cleaner flowers, colourful pots and festive decorations for gifting or keeping.</p>
+        <a class="button" href="#shop">Shop the collection</a>
+      </div>
+      <div class="photo" id="hero-photo"></div>
+    </section>
+
+    <section class="collection" id="shop" aria-labelledby="collection-title">
+      <div class="section-row">
+        <h2 id="collection-title">The collection</h2>
+        <p class="muted" id="product-count" aria-live="polite"></p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter products"></div>
+      <div class="grid" id="products"></div>
+      <p class="visually-hidden" id="basket-status" role="status"></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Twist &amp; Make · Handmade flowers and decorations</div>
+  </footer>
+
+  <dialog id="basket" aria-labelledby="basket-title">
+    <div class="section-row">
+      <h2 id="basket-title">Your basket</h2>
+      <form method="dialog"><button class="outline" type="submit">Close</button></form>
+    </div>
+    <div id="basket-items"></div>
+    <div class="total"><strong>Subtotal</strong><strong id="subtotal"></strong></div>
+    <p class="muted">Local preview. Delivery and online payment will be available once the shop is set up for orders.</p>
+  </dialog>
+
+  <script>
+    // Each row has a photo filename, title, category, price in pounds and description.
+    const products = [
+      ["rainbow-pot.png", "Rainbow Bloom Pot", "Pots", 19.95, "Bright mixed flowers in a brown and cream pot with a pink bow."],
+      ["sunshine-pot.png", "Sunshine Bow Pot", "Pots", 19.95, "Mint, blue and yellow blooms in a yellow pot with a cobalt bow."],
+      ["red-rose.png", "Classic Red Rose", "Single stems", 6.95, "A single red rose with layered petals and green leaves."],
+      ["purple-bouquet.png", "Purple Meadow Bouquet", "Bouquets", 14.95, "Purple flower heads and slender lavender sprigs."],
+      ["scarlet-sprig.png", "Scarlet and Blush Sprig", "Bouquets", 12.95, "A red flower and pale pink bud framed by green foliage."],
+      ["pastel-pot.png", "Pastel Pearl Pot", "Pots", 18.95, "Multicoloured blooms with pearl accents in a lilac pot."],
+      ["smiley-pot.png", "Smiley Daisy Pot", "Pots", 12.95, "A pink daisy in a red pot with a smiling face."],
+      ["pearl-pot.png", "Pearl Bow Daisy Pot", "Pots", 14.95, "A white daisy with a lilac centre and a pearl-style bow on the pot."],
+      ["ocean-bouquet.png", "Ocean Bloom Bouquet", "Bouquets", 18.95, "A full arrangement of mint, sky-blue and deep blue flowers."],
+      ["lilac-daisy.png", "Lilac Daisy Stem", "Single stems", 5.95, "A purple daisy with a bright yellow centre."],
+      ["white-bouquet.png", "White and Lilac Bouquet", "Bouquets", 16.95, "White blooms with curled stems and lilac and pink accents."],
+      ["pink-daisy-duo.png", "Pink Daisy Duo", "Bouquets", 10.95, "Two daisies in blush and bright pink, each with a yellow centre."],
+      ["classic-tree.jpeg", "Classic Christmas Tree", "Christmas", 18.95, "A tabletop tree with green branches, candy canes and a cream bow."],
+      ["snowy-tree.jpeg", "Snowy Christmas Tree", "Christmas", 18.95, "A green and white tabletop tree with a red bow and green topper."],
+      ["holly-tree.jpeg", "Holly Bow Christmas Tree", "Christmas", 18.95, "A dark green tabletop tree with red decorations and a cream topper."],
+      ["candy-cane-tree.jpeg", "Candy Cane Christmas Tree", "Christmas", 18.95, "A red, white and green tabletop tree with candy cane details."]
+    ].map(([file, name, category, price, description]) => ({
+      file, name, category, pence: Math.round(price * 100), description
+    }));
+
+    const money = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" });
+    const formatPrice = pence => money.format(pence / 100);
+    const basket = new Map();
+    const dialog = document.querySelector("#basket");
+    const openBasket = document.querySelector("#open-basket");
+    const filters = document.querySelector("#filters");
+    const grid = document.querySelector("#products");
+
+    function addPhoto(container, product, lazy = false) {
+      const image = document.createElement("img");
+      image.alt = product.description;
+      if (lazy) image.loading = "lazy";
+      image.addEventListener("error", () => {
+        image.hidden = true;
+        const message = document.createElement("p");
+        message.textContent = `Add images/${product.file} to show this photo.`;
+        container.append(message);
+      }, { once: true });
+      container.append(image);
+      image.src = `images/${product.file}`;
+    }
+
+    function renderProducts(category) {
+      const visible = category === "All"
+        ? products
+        : products.filter(product => product.category === category);
+
+      document.querySelector("#product-count").textContent = `${visible.length} products`;
+      for (const button of filters.children) {
+        button.setAttribute("aria-pressed", String(button.textContent === category));
+      }
+
+      grid.replaceChildren();
+      for (const product of visible) {
+        const card = document.createElement("article");
+        card.className = "product";
+        card.innerHTML = `
+          <div class="photo"></div>
+          <div class="details"><h3></h3><p class="muted"></p></div>
+          <div class="card-row"><span class="price"></span><button type="button">Add to basket</button></div>
+        `;
+        addPhoto(card.querySelector(".photo"), product, true);
+        card.querySelector("h3").textContent = product.name;
+        card.querySelector(".details p").textContent = product.description;
+        card.querySelector(".price").textContent = formatPrice(product.pence);
+        const add = card.querySelector("button");
+        add.setAttribute("aria-label", `Add ${product.name} to basket`);
+        add.addEventListener("click", () => changeQuantity(product, 1));
+        grid.append(card);
+      }
+    }
+
+    function changeQuantity(product, change) {
+      const quantity = (basket.get(product) || 0) + change;
+      if (quantity > 0) basket.set(product, quantity);
+      else basket.delete(product);
+      renderBasket();
+      document.querySelector("#basket-status").textContent =
+        `${product.name}: ${quantity} in your basket.`;
+    }
+
+    function renderBasket() {
+      const items = document.querySelector("#basket-items");
+      const focused = document.activeElement;
+      const focusedAction = items.contains(focused) ? focused.dataset.action : "";
+      items.replaceChildren();
+      let count = 0;
+      let subtotal = 0;
+
+      if (basket.size === 0) items.textContent = "Your basket is empty.";
+
+      for (const [product, quantity] of basket) {
+        count += quantity;
+        subtotal += product.pence * quantity;
+        const row = document.createElement("div");
+        row.className = "basket-row";
+        row.innerHTML = `
+          <div><strong></strong><div class="muted"></div></div>
+          <div class="quantity">
+            <button class="outline" type="button">−</button>
+            <span></span>
+            <button class="outline" type="button">+</button>
+          </div>
+        `;
+        row.querySelector("strong").textContent = product.name;
+        row.querySelector(".muted").textContent = formatPrice(product.pence * quantity);
+        row.querySelector("span").textContent = quantity;
+        const [remove, add] = row.querySelectorAll("button");
+        remove.dataset.action = `${product.file}-remove`;
+        add.dataset.action = `${product.file}-add`;
+        remove.setAttribute("aria-label", `Remove one ${product.name}`);
+        add.setAttribute("aria-label", `Add one ${product.name}`);
+        remove.addEventListener("click", () => changeQuantity(product, -1));
+        add.addEventListener("click", () => changeQuantity(product, 1));
+        items.append(row);
+      }
+
+      openBasket.textContent = `Basket (${count})`;
+      document.querySelector("#subtotal").textContent = formatPrice(subtotal);
+
+      if (focusedAction) {
+        const replacement = [...items.querySelectorAll("button")]
+          .find(button => button.dataset.action === focusedAction);
+        (replacement || dialog.querySelector("form button")).focus();
+      }
+    }
+
+    for (const category of ["All", "Single stems", "Bouquets", "Pots", "Christmas"]) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "outline";
+      button.textContent = category;
+      button.addEventListener("click", () => renderProducts(category));
+      filters.append(button);
+    }
+
+    openBasket.addEventListener("click", () => dialog.showModal());
+    addPhoto(document.querySelector("#hero-photo"), products[0]);
+    renderProducts("All");
+    renderBasket();
+  </script>
+</body>
+</html>
